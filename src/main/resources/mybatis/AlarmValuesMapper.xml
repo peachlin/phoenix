@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.AlarmValuesMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.sqlserver.AlarmValues">
+    <result column="ALARM_ID" property="alarmId" jdbcType="INTEGER"/>
+    <result column="ALARM_VALUE_ID" property="alarmValueId" jdbcType="INTEGER"/>
+    <result column="ALARM_STATUS" property="alarmStatus" jdbcType="INTEGER"/>
+    <result column="ALARM_DATETIME" property="alarmDatetime" jdbcType="TIMESTAMP"/>
+    <result column="CONFIRM_DATETIME" property="confirmDatetime" jdbcType="TIMESTAMP"/>
+    <result column="CLOSE_DATETIME" property="closeDatetime" jdbcType="TIMESTAMP"/>
+    <result column="CONFIRM_USER" property="confirmUser" jdbcType="VARCHAR"/>
+    <result column="CLOSE_USER" property="closeUser" jdbcType="VARCHAR"/>
+    <result column="ALARM_EW" property="alarmEw" jdbcType="INTEGER"/>
+    <result column="ALARM_QRK_L" property="alarmQrkL" jdbcType="INTEGER"/>
+    <result column="ALARM_QRK_S" property="alarmQrkS" jdbcType="INTEGER"/>
+    <result column="ALARM_CP" property="alarmCp" jdbcType="INTEGER"/>
+    <result column="ALARM_EVENT" property="alarmEvent" jdbcType="VARCHAR"/>
+    <result column="K0006" property="k0006" jdbcType="VARCHAR"/>
+    <result column="K0007" property="k0007" jdbcType="INTEGER"/>
+    <result column="K0008" property="k0008" jdbcType="INTEGER"/>
+    <result column="K0010" property="k0010" jdbcType="INTEGER"/>
+    <result column="K0012" property="k0012" jdbcType="INTEGER"/>
+    <result column="K0053" property="k0053" jdbcType="VARCHAR"/>
+    <result column="K1000" property="k1000" jdbcType="INTEGER"/>
+    <result column="K2000" property="k2000" jdbcType="INTEGER"/>
+    <result column="K0000" property="k0000" jdbcType="INTEGER"/>
+    <result column="POINTS" property="points" jdbcType="INTEGER"/>
+    <result column="K0009" property="k0009" jdbcType="VARCHAR"/>
+    <result column="K0014" property="k0014" jdbcType="VARCHAR"/>
+    <result column="K0016" property="k0016" jdbcType="VARCHAR"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.sqlserver.AlarmValues">
+    insert into ALARM_VALUES (ALARM_ID, ALARM_VALUE_ID, ALARM_STATUS,
+                              ALARM_DATETIME, CONFIRM_DATETIME, CLOSE_DATETIME,
+                              CONFIRM_USER, CLOSE_USER, ALARM_EW,
+                              ALARM_QRK_L, ALARM_QRK_S, ALARM_CP,
+                              ALARM_EVENT, K0006, K0007,
+                              K0008, K0010, K0012,
+                              K0053, K1000, K2000,
+                              K0000, POINTS, K0009,
+                              K0014, K0016)
+    values (#{alarmId,jdbcType=INTEGER}, #{alarmValueId,jdbcType=INTEGER},
+            #{alarmStatus,jdbcType=INTEGER},
+            #{alarmDatetime,jdbcType=TIMESTAMP}, #{confirmDatetime,jdbcType=TIMESTAMP},
+            #{closeDatetime,jdbcType=TIMESTAMP},
+            #{confirmUser,jdbcType=VARCHAR}, #{closeUser,jdbcType=VARCHAR},
+            #{alarmEw,jdbcType=INTEGER},
+            #{alarmQrkL,jdbcType=INTEGER}, #{alarmQrkS,jdbcType=INTEGER},
+            #{alarmCp,jdbcType=INTEGER},
+            #{alarmEvent,jdbcType=VARCHAR}, #{k0006,jdbcType=VARCHAR}, #{k0007,jdbcType=INTEGER},
+            #{k0008,jdbcType=INTEGER}, #{k0010,jdbcType=INTEGER}, #{k0012,jdbcType=INTEGER},
+            #{k0053,jdbcType=VARCHAR}, #{k1000,jdbcType=INTEGER}, #{k2000,jdbcType=INTEGER},
+            #{k0000,jdbcType=INTEGER}, #{points,jdbcType=INTEGER}, #{k0009,jdbcType=VARCHAR},
+            #{k0014,jdbcType=VARCHAR}, #{k0016,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.sqlserver.AlarmValues">
+    insert into ALARM_VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="alarmId != null">
+        ALARM_ID,
+      </if>
+      <if test="alarmValueId != null">
+        ALARM_VALUE_ID,
+      </if>
+      <if test="alarmStatus != null">
+        ALARM_STATUS,
+      </if>
+      <if test="alarmDatetime != null">
+        ALARM_DATETIME,
+      </if>
+      <if test="confirmDatetime != null">
+        CONFIRM_DATETIME,
+      </if>
+      <if test="closeDatetime != null">
+        CLOSE_DATETIME,
+      </if>
+      <if test="confirmUser != null">
+        CONFIRM_USER,
+      </if>
+      <if test="closeUser != null">
+        CLOSE_USER,
+      </if>
+      <if test="alarmEw != null">
+        ALARM_EW,
+      </if>
+      <if test="alarmQrkL != null">
+        ALARM_QRK_L,
+      </if>
+      <if test="alarmQrkS != null">
+        ALARM_QRK_S,
+      </if>
+      <if test="alarmCp != null">
+        ALARM_CP,
+      </if>
+      <if test="alarmEvent != null">
+        ALARM_EVENT,
+      </if>
+      <if test="k0006 != null">
+        K0006,
+      </if>
+      <if test="k0007 != null">
+        K0007,
+      </if>
+      <if test="k0008 != null">
+        K0008,
+      </if>
+      <if test="k0010 != null">
+        K0010,
+      </if>
+      <if test="k0012 != null">
+        K0012,
+      </if>
+      <if test="k0053 != null">
+        K0053,
+      </if>
+      <if test="k1000 != null">
+        K1000,
+      </if>
+      <if test="k2000 != null">
+        K2000,
+      </if>
+      <if test="k0000 != null">
+        K0000,
+      </if>
+      <if test="points != null">
+        POINTS,
+      </if>
+      <if test="k0009 != null">
+        K0009,
+      </if>
+      <if test="k0014 != null">
+        K0014,
+      </if>
+      <if test="k0016 != null">
+        K0016,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="alarmId != null">
+        #{alarmId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmValueId != null">
+        #{alarmValueId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmStatus != null">
+        #{alarmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="alarmDatetime != null">
+        #{alarmDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmDatetime != null">
+        #{confirmDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeDatetime != null">
+        #{closeDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null">
+        #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="closeUser != null">
+        #{closeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmEw != null">
+        #{alarmEw,jdbcType=INTEGER},
+      </if>
+      <if test="alarmQrkL != null">
+        #{alarmQrkL,jdbcType=INTEGER},
+      </if>
+      <if test="alarmQrkS != null">
+        #{alarmQrkS,jdbcType=INTEGER},
+      </if>
+      <if test="alarmCp != null">
+        #{alarmCp,jdbcType=INTEGER},
+      </if>
+      <if test="alarmEvent != null">
+        #{alarmEvent,jdbcType=VARCHAR},
+      </if>
+      <if test="k0006 != null">
+        #{k0006,jdbcType=VARCHAR},
+      </if>
+      <if test="k0007 != null">
+        #{k0007,jdbcType=INTEGER},
+      </if>
+      <if test="k0008 != null">
+        #{k0008,jdbcType=INTEGER},
+      </if>
+      <if test="k0010 != null">
+        #{k0010,jdbcType=INTEGER},
+      </if>
+      <if test="k0012 != null">
+        #{k0012,jdbcType=INTEGER},
+      </if>
+      <if test="k0053 != null">
+        #{k0053,jdbcType=VARCHAR},
+      </if>
+      <if test="k1000 != null">
+        #{k1000,jdbcType=INTEGER},
+      </if>
+      <if test="k2000 != null">
+        #{k2000,jdbcType=INTEGER},
+      </if>
+      <if test="k0000 != null">
+        #{k0000,jdbcType=INTEGER},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="k0009 != null">
+        #{k0009,jdbcType=VARCHAR},
+      </if>
+      <if test="k0014 != null">
+        #{k0014,jdbcType=VARCHAR},
+      </if>
+      <if test="k0016 != null">
+        #{k0016,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -21,7 +21,8 @@
       <property name="forceBigDecimals" value="false"/>
     </javaTypeResolver>
     <!-- 生成模型的包名和位置-->
-    <javaModelGenerator targetPackage="com.zmsj.phoenix.model.sqlserver" targetProject="src/main/java">
+    <javaModelGenerator targetPackage="com.zmsj.phoenix.model.sqlserver"
+      targetProject="src/main/java">
       <property name="enableSubPackages" value="true"/>
       <property name="trimStrings" value="true"/>
     </javaModelGenerator>
@@ -35,7 +36,19 @@
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
     <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-    <table tableName="HIERARCHIE" domainObjectName="Hierarchie" enableCountByExample="false"
+    <table tableName="TEIL" domainObjectName="Teil" enableCountByExample="false"
+      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+      selectByExampleQueryId="false"></table>
+    <table tableName="MERKMAL" domainObjectName="Merkmal" enableCountByExample="false"
+      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+      selectByExampleQueryId="false"></table>
+    <table tableName="WERTEVAR" domainObjectName="Wertevar" enableCountByExample="false"
+      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+      selectByExampleQueryId="false"></table>
+    <table tableName="ALARMS" domainObjectName="Alarms" enableCountByExample="false"
+      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+      selectByExampleQueryId="false"></table>
+    <table tableName="ALARM_VALUES" domainObjectName="AlarmValues" enableCountByExample="false"
       enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       selectByExampleQueryId="false"></table>
   </context>
