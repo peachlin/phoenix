@@ -1,0 +1,12 @@
+server:
+  port: 9768
+spring:
+  application:
+    name: phoenix
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=zmsj
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: master
+    password: 123456
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
