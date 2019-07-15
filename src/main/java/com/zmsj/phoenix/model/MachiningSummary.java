@@ -17,5 +17,5 @@ public class MachiningSummary {
   @ApiModelProperty("产品编号")
   private String code;
   @ApiModelProperty("工序通过率指标")
-  private List<KeyValueDto> summaryLisy;
+  private List<KeyValueDto> summaryList;
 }

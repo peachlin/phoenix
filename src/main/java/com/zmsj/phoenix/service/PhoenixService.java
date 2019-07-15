@@ -1,10 +1,22 @@
 package com.zmsj.phoenix.service;
 
+import com.google.common.collect.Lists;
 import com.zmsj.phoenix.model.CenterDto;
+import com.zmsj.phoenix.model.EnergyConsumeDto;
+import com.zmsj.phoenix.model.Equipment;
 import com.zmsj.phoenix.model.FirstLeftDto;
 import com.zmsj.phoenix.model.FirstRightDto;
+import com.zmsj.phoenix.model.GroupRateDto;
+import com.zmsj.phoenix.model.KeyValueDto;
+import com.zmsj.phoenix.model.MachiningSummary;
+import com.zmsj.phoenix.model.MaterialAnalysisDto;
 import com.zmsj.phoenix.model.SecondLeftDto;
 import com.zmsj.phoenix.model.SecondRightDto;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,22 +26,183 @@ import org.springframework.stereotype.Service;
 public class PhoenixService {
 
   public CenterDto getSummary() {
-    return null;
+
+    CenterDto centerDto = new CenterDto();
+    centerDto.setProductionStaffNum(getRandom(79, 74));
+    centerDto.setTotalProduction(getRandom(6854, 5678));
+    centerDto.setEquipmentNum(getRandom(146, 144));
+    centerDto.setEnvQuality(getRandom(100, 89));
+
+    List<Equipment> equipmentList = Lists.newArrayList();
+    for (int i = 0; i < 4; i++) {
+      Equipment equipment = new Equipment();
+      equipment.setName("设备" + (i + 1));
+      equipment.setStatus("正常");
+      equipment.setStandbyRate(getRandom(100, 87) / 100d);
+      equipment.setTestStatus(getRandom(100, 87) / 100d);
+      equipment.setTestNum(getRandom(378, 312));
+      equipment.setPassRate(getRandom(100, 87) / 100d);
+      equipment.setTaskCompleteRate(getRandom(100, 65) / 100d);
+      equipmentList.add(equipment);
+    }
+    centerDto.setEquipmentList(equipmentList);
+    return centerDto;
   }
 
   public FirstLeftDto getFirstLeft() {
-    return null;
+
+    FirstLeftDto firstLeftDto = new FirstLeftDto();
+    KeyValueDto kv1 = new KeyValueDto("工序A", 2224d);
+    KeyValueDto kv2 = new KeyValueDto("工序B", 2011d);
+    KeyValueDto kv3 = new KeyValueDto("工序C", 1920d);
+    KeyValueDto kv4 = new KeyValueDto("工序D", 3127d);
+    KeyValueDto kv5 = new KeyValueDto("工序E", 987d);
+    List<KeyValueDto> list1 = Lists.newArrayList(kv1, kv2, kv3, kv4, kv5);
+    firstLeftDto.setTodayProductionTotal(list1);
+
+    MachiningSummary summary = new MachiningSummary();
+    summary.setTitle("正在加工:移动设备屏幕-彩屏");
+    summary.setCode("ZJY0980");
+    KeyValueDto kv7 = new KeyValueDto("工序A通过率", 0.97);
+    KeyValueDto kv8 = new KeyValueDto("工序B通过率", 0.99);
+    KeyValueDto kv9 = new KeyValueDto("工序C通过率", 1.0);
+    KeyValueDto kv10 = new KeyValueDto("工序D通过率", 0.98);
+    KeyValueDto kv11 = new KeyValueDto("工序E通过率", 0.98);
+    List<KeyValueDto> list2 = Lists.newArrayList(kv7, kv8, kv9, kv10, kv11);
+    summary.setSummaryList(list2);
+    firstLeftDto.setMachiningSummary(summary);
+
+    Map<String, Double> ratio = new HashMap<>();
+    ratio.put("原料1", 0.35);
+    ratio.put("原料2", 0.12);
+    ratio.put("原料3", 0.8);
+    ratio.put("原料4", 0.45);
+    firstLeftDto.setMaterialRatio(ratio);
+
+    return firstLeftDto;
   }
 
   public SecondLeftDto getSecondLeft() {
-    return null;
+
+    SecondLeftDto secondLeftDto = new SecondLeftDto();
+    List<MaterialAnalysisDto> list1 = Lists.newArrayList();
+    for (int i = 0; i < 5; i++) {
+      MaterialAnalysisDto dto = new MaterialAnalysisDto();
+      dto.setDate(getDate(i));
+      int max = 7000;
+      int min = 6000;
+      int randoma = new Random().nextInt(max - min) + min;
+      int randomb = new Random().nextInt(max - min) + min;
+      KeyValueDto a = new KeyValueDto("采购", (double) randoma);
+      KeyValueDto b = new KeyValueDto("消耗", (double) randomb);
+      dto.setGroup2RateList(Lists.newArrayList(a, b));
+      list1.add(dto);
+    }
+    secondLeftDto.setMaterialAnalysis(list1);
+
+    List<KeyValueDto> list2 = Lists.newArrayList();
+    for (int i = 0; i < 5; i++) {
+      int max = 100;
+      int min = 60;
+      int random = new Random().nextInt(max - min) + min;
+      KeyValueDto kv = new KeyValueDto(getDate(i), random / 100d);
+      list2.add(kv);
+    }
+    secondLeftDto.setCompletionRate(list2);
+
+    List<EnergyConsumeDto> list3 = Lists.newArrayList();
+    for (int i = 0; i < 5; i++) {
+      EnergyConsumeDto dto = new EnergyConsumeDto();
+      dto.setDate(getDate(i));
+
+      int max = 100;
+      int min = 87;
+      int randoma = new Random().nextInt(max - min) + min;
+      int randomb = new Random().nextInt(max - min) + min;
+      int randomc = new Random().nextInt(max - min) + min;
+      KeyValueDto a = new KeyValueDto("气", randoma / 100d);
+      KeyValueDto b = new KeyValueDto("水", randomb / 100d);
+      KeyValueDto c = new KeyValueDto("电", randomc / 100d);
+      dto.setGroup2RateList(Lists.newArrayList(a, b, c));
+      list3.add(dto);
+    }
+    secondLeftDto.setEnergyConsume(list3);
+    return secondLeftDto;
   }
 
   public FirstRightDto getFirstRight() {
-    return null;
+
+    FirstRightDto firstRightDto = new FirstRightDto();
+
+    List<KeyValueDto> list1 = Lists.newArrayList();
+    for (int i = 0; i < 5; i++) {
+      int max = 100;
+      int min = 79;
+      int randoma = new Random().nextInt(max - min) + min;
+      KeyValueDto kv = new KeyValueDto(getDate(i), randoma / 100d);
+      list1.add(kv);
+    }
+    firstRightDto.setDepotEfficiency(list1);
+
+    Map<String, Double> goodRate = new HashMap<>();
+    goodRate.put("工序A通过率", 0.97);
+    goodRate.put("工序B通过率", 0.99);
+    goodRate.put("工序C通过率", 1.0);
+    goodRate.put("工序D通过率", 0.98);
+    goodRate.put("工序E通过率", 0.98);
+    firstRightDto.setGoodRate(goodRate);
+
+    KeyValueDto kv7 = new KeyValueDto("缺陷1", 0.07);
+    KeyValueDto kv8 = new KeyValueDto("缺陷2", 0.08);
+    KeyValueDto kv9 = new KeyValueDto("缺陷3", 0.01);
+    KeyValueDto kv10 = new KeyValueDto("缺陷4", 0.13);
+    List<KeyValueDto> list2 = Lists.newArrayList(kv7, kv8, kv9, kv10);
+    firstRightDto.setOpenDefect(list2);
+    return firstRightDto;
   }
 
   public SecondRightDto getSecondRight() {
-    return null;
+
+    SecondRightDto secondRightDto = new SecondRightDto();
+
+    List<GroupRateDto> list1 = Lists.newArrayList();
+    for (int i = 0; i < 5; i++) {
+      GroupRateDto groupRateDto = new GroupRateDto();
+      groupRateDto.setDate(getDate(i));
+
+      int max = 100;
+      int min = 95;
+      int randoma = new Random().nextInt(max - min) + min;
+      int randomb = new Random().nextInt(max - min) + min;
+      int randomc = new Random().nextInt(max - min) + min;
+      KeyValueDto a = new KeyValueDto("一组", randoma / 100d);
+      KeyValueDto b = new KeyValueDto("二组", randomb / 100d);
+      KeyValueDto c = new KeyValueDto("三组", randomc / 100d);
+      list1.add(groupRateDto);
+    }
+    secondRightDto.setGroupRate(list1);
+
+    KeyValueDto dto1 = new KeyValueDto("指标1", getRandom(100, 95) / 100d);
+    KeyValueDto dto2 = new KeyValueDto("指标2", getRandom(95, 90) / 100d);
+    KeyValueDto dto3 = new KeyValueDto("指标3", getRandom(90, 85) / 100d);
+    KeyValueDto dto4 = new KeyValueDto("指标4", getRandom(85, 80) / 100d);
+    secondRightDto.setPerfQuality(Lists.newArrayList(dto1, dto2, dto3, dto4));
+
+    KeyValueDto dto5 = new KeyValueDto("问题1", getRandom(12, 4) / 100d);
+    KeyValueDto dto6 = new KeyValueDto("问题2", getRandom(12, 4) / 100d);
+    KeyValueDto dto7 = new KeyValueDto("问题3", getRandom(12, 4) / 100d);
+    KeyValueDto dto8 = new KeyValueDto("问题4", getRandom(12, 4) / 100d);
+    secondRightDto.setProblemStatistics(Lists.newArrayList(dto5, dto6, dto7, dto8));
+    return secondRightDto;
+  }
+
+  private int getRandom(int max, int min) {
+    return new Random().nextInt(max - min) + min;
+  }
+
+  private String getDate(int i) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) - i);
+    return (Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
   }
 }
