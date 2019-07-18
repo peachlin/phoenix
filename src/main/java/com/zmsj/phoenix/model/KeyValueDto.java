@@ -21,4 +21,11 @@ public class KeyValueDto {
     this.key = key;
     this.value = value;
   }
+
+  public KeyValueDto(String key, Integer value) {
+    this.key = key;
+    if (null != value) {
+      this.value = (double) value;
+    }
+  }
 }
