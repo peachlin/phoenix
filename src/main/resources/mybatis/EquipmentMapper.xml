@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.EquipmentMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.mysql.Equipment">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="VARCHAR"/>
+    <result column="standbyRate" property="standbyRate" jdbcType="DOUBLE"/>
+    <result column="testStatus" property="testStatus" jdbcType="DOUBLE"/>
+    <result column="testNum" property="testNum" jdbcType="INTEGER"/>
+    <result column="passRate" property="passRate" jdbcType="DOUBLE"/>
+    <result column="taskCompleteRate" property="taskCompleteRate" jdbcType="DOUBLE"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, status, standbyRate, testStatus, testNum, passRate, taskCompleteRate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from equipment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectN" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from equipment limit #{num}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete
+    from equipment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.mysql.Equipment">
+    insert into equipment (id, name, status,
+                           standbyRate, testStatus, testNum,
+                           passRate, taskCompleteRate)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+            #{standbyrate,jdbcType=DOUBLE}, #{teststatus,jdbcType=DOUBLE},
+            #{testnum,jdbcType=INTEGER},
+            #{passrate,jdbcType=DOUBLE}, #{taskcompleterate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.mysql.Equipment">
+    insert into equipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="standbyrate != null">
+        standbyRate,
+      </if>
+      <if test="teststatus != null">
+        testStatus,
+      </if>
+      <if test="testnum != null">
+        testNum,
+      </if>
+      <if test="passrate != null">
+        passRate,
+      </if>
+      <if test="taskcompleterate != null">
+        taskCompleteRate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyrate != null">
+        #{standbyrate,jdbcType=DOUBLE},
+      </if>
+      <if test="teststatus != null">
+        #{teststatus,jdbcType=DOUBLE},
+      </if>
+      <if test="testnum != null">
+        #{testnum,jdbcType=INTEGER},
+      </if>
+      <if test="passrate != null">
+        #{passrate,jdbcType=DOUBLE},
+      </if>
+      <if test="taskcompleterate != null">
+        #{taskcompleterate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmsj.phoenix.model.mysql.Equipment">
+    update equipment
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="standbyrate != null">
+        standbyRate = #{standbyrate,jdbcType=DOUBLE},
+      </if>
+      <if test="teststatus != null">
+        testStatus = #{teststatus,jdbcType=DOUBLE},
+      </if>
+      <if test="testnum != null">
+        testNum = #{testnum,jdbcType=INTEGER},
+      </if>
+      <if test="passrate != null">
+        passRate = #{passrate,jdbcType=DOUBLE},
+      </if>
+      <if test="taskcompleterate != null">
+        taskCompleteRate = #{taskcompleterate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmsj.phoenix.model.mysql.Equipment">
+    update equipment
+    set name             = #{name,jdbcType=VARCHAR},
+        status           = #{status,jdbcType=VARCHAR},
+        standbyRate      = #{standbyrate,jdbcType=DOUBLE},
+        testStatus       = #{teststatus,jdbcType=DOUBLE},
+        testNum          = #{testnum,jdbcType=INTEGER},
+        passRate         = #{passrate,jdbcType=DOUBLE},
+        taskCompleteRate = #{taskcompleterate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

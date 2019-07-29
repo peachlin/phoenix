@@ -5,7 +5,7 @@
 <generatorConfiguration>
   <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
   <classPathEntry
-    location="C:\Users\wangk\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>
+    location="C:\Users\wangk\.m2\repository\com\hynnet\sqljdbc4-chs\4.0.2206.100\sqljdbc4-chs-4.0.2206.100.jar"/>
   <context id="SqlServerTables" targetRuntime="MyBatis3">
     <commentGenerator>
       <property name="suppressDate" value="true"/>
@@ -13,16 +13,15 @@
       <property name="suppressAllComments" value="true"/>
     </commentGenerator>
     <!--数据库链接URL，用户名、密码 -->
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-      connectionURL="jdbc:mysql://10.144.91.125:30118/walle?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;autoReconnect=true"
-      userId="root"
-      password="Deepwatch1357">
+    <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+      connectionURL="jdbc:sqlserver://localhost:1433;DatabaseName=zmsj" userId="zmsj"
+      password="123456">
     </jdbcConnection>
     <javaTypeResolver>
       <property name="forceBigDecimals" value="false"/>
     </javaTypeResolver>
     <!-- 生成模型的包名和位置-->
-    <javaModelGenerator targetPackage="com.zmsj.phoenix.model.mysql"
+    <javaModelGenerator targetPackage="com.zmsj.phoenix.model.sqlserver"
       targetProject="src/main/java">
       <property name="enableSubPackages" value="true"/>
       <property name="trimStrings" value="true"/>
@@ -37,40 +36,20 @@
       <property name="enableSubPackages" value="true"/>
     </javaClientGenerator>
     <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-    <table tableName="complateRate" domainObjectName="ComplateRate" enableCountByExample="false"
+    <table tableName="TEIL" domainObjectName="Teil" enableCountByExample="false"
       enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       selectByExampleQueryId="false"></table>
-    <table tableName="depotEfficiency" domainObjectName="DepotEfficiency"
-      enableCountByExample="false"
+    <table tableName="MERKMAL" domainObjectName="Merkmal" enableCountByExample="false"
       enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       selectByExampleQueryId="false"></table>
-    <table tableName="energyConsume" domainObjectName="EnergyConsume" enableCountByExample="false"
+    <table tableName="WERTEVAR" domainObjectName="Wertevar" enableCountByExample="false"
       enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       selectByExampleQueryId="false"></table>
-    <table tableName="equipment" domainObjectName="Equipment" enableCountByExample="false"
+    <table tableName="ALARMS" domainObjectName="Alarms" enableCountByExample="false"
       enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       selectByExampleQueryId="false"></table>
-    <table tableName="groupRate" domainObjectName="GroupRate" enableCountByExample="false"
+    <table tableName="ALARM_VALUES" domainObjectName="AlarmValues" enableCountByExample="false"
       enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
       selectByExampleQueryId="false"></table>
-    <table tableName="materialAnalysis" domainObjectName="MaterialAnalysis"
-      enableCountByExample="false"
-      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-      selectByExampleQueryId="false"></table>
-    <table tableName="problemStatistics" domainObjectName="ProblemStatistics"
-      enableCountByExample="false"
-      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-      selectByExampleQueryId="false"></table>
-    <table tableName="procedureProcess" domainObjectName="ProcedureProcess"
-      enableCountByExample="false"
-      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-      selectByExampleQueryId="false"></table>
-    <table tableName="product" domainObjectName="Product" enableCountByExample="false"
-      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-      selectByExampleQueryId="false"></table>
-    <table tableName="summary" domainObjectName="Summary" enableCountByExample="false"
-      enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-      selectByExampleQueryId="false"></table>
-
   </context>
 </generatorConfiguration>

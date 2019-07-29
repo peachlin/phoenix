@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.DepotEfficiencyMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.mysql.DepotEfficiency">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="date" property="date" jdbcType="TIMESTAMP"/>
+    <result column="rate" property="rate" jdbcType="DOUBLE"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, date, rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from depotEfficiency
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByDate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from depotEfficiency
+    where date_format(date,'%Y-%m-%d')=#{dateStr} limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete
+    from depotEfficiency
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.mysql.DepotEfficiency">
+    insert into depotEfficiency (id, date, rate)
+    values (#{id,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{rate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.mysql.DepotEfficiency">
+    insert into depotEfficiency
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.zmsj.phoenix.model.mysql.DepotEfficiency">
+    update depotEfficiency
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmsj.phoenix.model.mysql.DepotEfficiency">
+    update depotEfficiency
+    set date = #{date,jdbcType=TIMESTAMP},
+        rate = #{rate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

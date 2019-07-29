@@ -4,9 +4,11 @@ spring:
   application:
     name: phoenix
   datasource:
-    url: jdbc:sqlserver://localhost:1433;DatabaseName=zmsj
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    username: master
+    #    url: jdbc:sqlserver://localhost:1433;DatabaseName=zmsj
+    #    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:mysql://47.101.177.31:3306/phoenix?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
     password: 123456
 mybatis:
   mapper-locations: classpath:mybatis/*.xml

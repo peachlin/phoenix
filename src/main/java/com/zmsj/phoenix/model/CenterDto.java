@@ -1,5 +1,6 @@
 package com.zmsj.phoenix.model;
 
+import com.zmsj.phoenix.model.mysql.Equipment;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;

@@ -1,15 +1,12 @@
-package com.zmsj.phoenix.model;
+package com.zmsj.phoenix.model.mysql;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-/**
- * @author wang.kun
- */
 @Data
-@ApiModel("设备详情")
 public class Equipment {
+
+  private String id;
 
   @ApiModelProperty("名称")
   private String name;
@@ -25,5 +22,4 @@ public class Equipment {
   private double passRate;
   @ApiModelProperty("任务完成率")
   private double taskCompleteRate;
-
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.MaterialAnalysisMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.mysql.MaterialAnalysis">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="type" property="type" jdbcType="VARCHAR"/>
+    <result column="rate" property="rate" jdbcType="DOUBLE"/>
+    <result column="date" property="date" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, rate, date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from materialAnalysis
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByDateAndType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from materialAnalysis
+    where type =#{type} and date_format(date,'%Y-%m-%d')=#{dateStr} limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete
+    from materialAnalysis
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.mysql.MaterialAnalysis">
+    insert into materialAnalysis (id, type, rate,
+                                  date)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{rate,jdbcType=DOUBLE},
+            #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.mysql.MaterialAnalysis">
+    insert into materialAnalysis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.zmsj.phoenix.model.mysql.MaterialAnalysis">
+    update materialAnalysis
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmsj.phoenix.model.mysql.MaterialAnalysis">
+    update materialAnalysis
+    set type = #{type,jdbcType=VARCHAR},
+        rate = #{rate,jdbcType=DOUBLE},
+        date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

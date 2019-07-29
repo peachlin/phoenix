@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.ProcedureProcessMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.mysql.ProcedureProcess">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="todayProductionTotal" property="todayproductiontotal" jdbcType="INTEGER"/>
+    <result column="passRate" property="passrate" jdbcType="DOUBLE"/>
+    <result column="goodRate" property="goodrate" jdbcType="DOUBLE"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, todayProductionTotal, passRate, goodRate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from procedureProcess
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from procedureProcess
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete
+    from procedureProcess
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.mysql.ProcedureProcess">
+    insert into procedureProcess (id, name, todayProductionTotal,
+                                  passRate, goodRate)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+            #{todayproductiontotal,jdbcType=INTEGER},
+            #{passrate,jdbcType=DOUBLE}, #{goodrate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.mysql.ProcedureProcess">
+    insert into procedureProcess
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="todayproductiontotal != null">
+        todayProductionTotal,
+      </if>
+      <if test="passrate != null">
+        passRate,
+      </if>
+      <if test="goodrate != null">
+        goodRate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="todayproductiontotal != null">
+        #{todayproductiontotal,jdbcType=INTEGER},
+      </if>
+      <if test="passrate != null">
+        #{passrate,jdbcType=DOUBLE},
+      </if>
+      <if test="goodrate != null">
+        #{goodrate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.zmsj.phoenix.model.mysql.ProcedureProcess">
+    update procedureProcess
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="todayproductiontotal != null">
+        todayProductionTotal = #{todayproductiontotal,jdbcType=INTEGER},
+      </if>
+      <if test="passrate != null">
+        passRate = #{passrate,jdbcType=DOUBLE},
+      </if>
+      <if test="goodrate != null">
+        goodRate = #{goodrate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmsj.phoenix.model.mysql.ProcedureProcess">
+    update procedureProcess
+    set name                 = #{name,jdbcType=VARCHAR},
+        todayProductionTotal = #{todayproductiontotal,jdbcType=INTEGER},
+        passRate             = #{passrate,jdbcType=DOUBLE},
+        goodRate             = #{goodrate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

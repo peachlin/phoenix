@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.SummaryMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.mysql.Summary">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="productionStaffNum" property="productionstaffnum" jdbcType="INTEGER"/>
+    <result column="totalProduction" property="totalproduction" jdbcType="INTEGER"/>
+    <result column="equipmentNum" property="equipmentnum" jdbcType="INTEGER"/>
+    <result column="envQuality" property="envquality" jdbcType="INTEGER"/>
+    <result column="product" property="product" jdbcType="VARCHAR"/>
+    <result column="productCode" property="productcode" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, productionStaffNum, totalProduction, equipmentNum, envQuality, product, productCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from summary
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectOne" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from summary limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete
+    from summary
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.mysql.Summary">
+    insert into summary (id, productionStaffNum, totalProduction,
+                         equipmentNum, envQuality, product,
+                         productCode)
+    values (#{id,jdbcType=VARCHAR}, #{productionstaffnum,jdbcType=INTEGER},
+            #{totalproduction,jdbcType=INTEGER},
+            #{equipmentnum,jdbcType=INTEGER}, #{envquality,jdbcType=INTEGER},
+            #{product,jdbcType=VARCHAR},
+            #{productcode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.mysql.Summary">
+    insert into summary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productionstaffnum != null">
+        productionStaffNum,
+      </if>
+      <if test="totalproduction != null">
+        totalProduction,
+      </if>
+      <if test="equipmentnum != null">
+        equipmentNum,
+      </if>
+      <if test="envquality != null">
+        envQuality,
+      </if>
+      <if test="product != null">
+        product,
+      </if>
+      <if test="productcode != null">
+        productCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productionstaffnum != null">
+        #{productionstaffnum,jdbcType=INTEGER},
+      </if>
+      <if test="totalproduction != null">
+        #{totalproduction,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentnum != null">
+        #{equipmentnum,jdbcType=INTEGER},
+      </if>
+      <if test="envquality != null">
+        #{envquality,jdbcType=INTEGER},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null">
+        #{productcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmsj.phoenix.model.mysql.Summary">
+    update summary
+    <set>
+      <if test="productionstaffnum != null">
+        productionStaffNum = #{productionstaffnum,jdbcType=INTEGER},
+      </if>
+      <if test="totalproduction != null">
+        totalProduction = #{totalproduction,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentnum != null">
+        equipmentNum = #{equipmentnum,jdbcType=INTEGER},
+      </if>
+      <if test="envquality != null">
+        envQuality = #{envquality,jdbcType=INTEGER},
+      </if>
+      <if test="product != null">
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null">
+        productCode = #{productcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmsj.phoenix.model.mysql.Summary">
+    update summary
+    set productionStaffNum = #{productionstaffnum,jdbcType=INTEGER},
+        totalProduction    = #{totalproduction,jdbcType=INTEGER},
+        equipmentNum       = #{equipmentnum,jdbcType=INTEGER},
+        envQuality         = #{envquality,jdbcType=INTEGER},
+        product            = #{product,jdbcType=VARCHAR},
+        productCode        = #{productcode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

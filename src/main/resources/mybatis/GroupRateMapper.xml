@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zmsj.phoenix.dao.GroupRateMapper">
+  <resultMap id="BaseResultMap" type="com.zmsj.phoenix.model.mysql.GroupRate">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="group" property="group" jdbcType="VARCHAR"/>
+    <result column="rate" property="rate" jdbcType="DOUBLE"/>
+    <result column="date" property="date" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `group`, rate, `date`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from groupRate
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectGroups" resultType="java.lang.String">
+    select distinct (`group`)
+    from groupRate
+  </select>
+  <select id="selectByDateAndGroup" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from groupRate
+    where date_format(date,'%Y-%m-%d')= #{dateStr} and `group` = #{group} limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete
+    from groupRate
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zmsj.phoenix.model.mysql.GroupRate">
+    insert into groupRate (id, group, rate,
+                           date)
+    values (#{id,jdbcType=VARCHAR}, #{group,jdbcType=VARCHAR}, #{rate,jdbcType=DOUBLE},
+            #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmsj.phoenix.model.mysql.GroupRate">
+    insert into groupRate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="group != null">
+        group,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null">
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmsj.phoenix.model.mysql.GroupRate">
+    update groupRate
+    <set>
+      <if test="group != null">
+        group = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmsj.phoenix.model.mysql.GroupRate">
+    update groupRate
+    set group = #{group,jdbcType=VARCHAR},
+        rate  = #{rate,jdbcType=DOUBLE},
+        date  = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
